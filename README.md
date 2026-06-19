@@ -4,7 +4,7 @@
 > Institusi: **Institut Teknologi Sepuluh Nopember (ITS)**  
 > Semester: **4**
 
-Repository ini berisi dua program Python berbasis GUI (Tkinter) untuk tugas praktikum mata kuliah Teori Bahasa & Automata.
+Repository ini berisi tiga program Python berbasis GUI (Tkinter) untuk tugas praktikum mata kuliah Teori Bahasa & Automata.
 
 ---
 
@@ -14,6 +14,7 @@ Repository ini berisi dua program Python berbasis GUI (Tkinter) untuk tugas prak
 |------|-------|-------------------|
 | `TugasW2.py` | Praktikum #1 | Tokenizer / Lexical Analyzer |
 | `TugasW3.py` | Praktikum #2 | FSM (Finite State Machine) Simulator |
+| `TugasW7_PDA.py` | Praktikum PDA | NPDA / Pushdown Automata Simulator |
 
 ---
 
@@ -24,7 +25,7 @@ Repository ini berisi dua program Python berbasis GUI (Tkinter) untuk tugas prak
   ```bash
   sudo apt-get install python3-tk
   ```
-- Tidak memerlukan library eksternal tambahan (hanya menggunakan modul bawaan: `re`, `tkinter`, `math`).
+- Tidak memerlukan library eksternal tambahan (hanya menggunakan modul bawaan: `re`, `tkinter`, `math`, `dataclasses`, `collections`).
 
 ---
 
@@ -146,6 +147,50 @@ python TugasW3.py
 
 ---
 
+## TugasW7_PDA.py - PDA Simulator
+
+### Deskripsi
+
+Program ini mensimulasikan **Pushdown Automata (PDA)** secara umum. Pengguna dapat memilih preset bahasa, mengedit definisi PDA, memasukkan string, lalu melihat apakah string tersebut **Accepted** atau **Rejected** melalui trace dan visualisasi interaktif.
+
+Simulator menggunakan pencarian BFS sehingga dapat menangani **NPDA** dengan transisi nondeterministik dan transisi epsilon (`eps`).
+
+### Preset PDA
+
+| Preset | Contoh Accepted | Contoh Rejected |
+|--------|-----------------|-----------------|
+| `L = { a^n b^n / n >= 1 }` | `ab`, `aabb`, `aaabbb` | `aab`, `abb`, `ba` |
+| `Balanced Parentheses` | `()`, `(())`, `(()())` | `(()`, `())(` |
+| `PPT 7 - wXw^R` | `X`, `aXa`, `abXba` | `aXb`, `abXab`, `aba` |
+| `Palindrome {a,b}` | `a`, `aa`, `aba`, `abba` | `ab`, `aab`, `abab` |
+
+### Cara Menjalankan
+
+```bash
+python TugasW7_PDA.py
+```
+
+### Cara Self-Test
+
+```bash
+python TugasW7_PDA.py --test
+```
+
+### Fitur
+
+| Fitur | Deskripsi |
+|-------|-----------|
+| **Preset PDA** | Memuat contoh PDA yang siap diuji |
+| **Visualisasi interaktif** | Menampilkan graph state, transisi aktif, input tape, stack, dan operasi aktif sesuai preset yang dipilih |
+| **Editor definisi** | Mengubah states, alphabet, stack alphabet, start state, final states, dan acceptance mode |
+| **Editor transisi** | Menambah, menghapus, dan mengupdate transisi PDA |
+| **Mode Analyze** | Menampilkan hasil akhir Accepted atau Rejected secara langsung |
+| **Mode Step-by-step** | Menampilkan trace konfigurasi PDA satu per satu sambil menyorot visualisasi |
+| **Validasi input** | Menolak simbol input yang tidak ada pada alphabet |
+| **Batas simulasi** | Mencegah program macet akibat epsilon-loop |
+
+---
+
 ## Cara Menjalankan (Umum)
 
 ```bash
@@ -157,9 +202,12 @@ python TugasW2.py
 
 # Jalankan FSM Simulator
 python TugasW3.py
+
+# Jalankan PDA Simulator
+python TugasW7_PDA.py
 ```
 
-> **Catatan:** Kedua program menggunakan GUI (Tkinter), sehingga harus dijalankan di lingkungan yang mendukung tampilan grafis (desktop), bukan di terminal SSH tanpa X-forwarding.
+> **Catatan:** Program GUI (Tkinter) harus dijalankan di lingkungan yang mendukung tampilan grafis (desktop), bukan di terminal SSH tanpa X-forwarding.
 
 ---
 
@@ -169,7 +217,8 @@ python TugasW3.py
 Otomata/
 ├── README.md          ← Dokumentasi ini
 ├── TugasW2.py         ← Tokenizer / Lexical Analyzer
-└── TugasW3.py         ← FSM Simulator
+├── TugasW3.py         ← FSM Simulator
+└── TugasW7_PDA.py    ← PDA Simulator
 ```
 
 ---
